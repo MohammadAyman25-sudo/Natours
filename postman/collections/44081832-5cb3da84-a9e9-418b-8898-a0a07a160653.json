@@ -1,0 +1,1198 @@
+{
+	"info": {
+		"_postman_id": "44081832-5cb3da84-a9e9-418b-8898-a0a07a160653",
+		"name": "Natours",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tours",
+			"item": [
+				{
+					"name": "Get All Tours",
+					"id": "44081832-208afe70-8b57-4b42-9f1d-28595d789050",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours?slug=the-forest-hiker",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours"
+							],
+							"query": [
+								{
+									"key": "slug",
+									"value": "the-forest-hiker"
+								}
+							]
+						},
+						"description": "## API Endpoint: Get Tour Details\n\n### Purpose\n\nThis endpoint retrieves detailed information about a specific tour identified by its unique slug. It is useful for clients who need to display or utilize the details of a particular tour in their application.\n\n### Request Format\n\n- **Method**: GET\n    \n- **Endpoint**: `{{URL}}api/v1/tours`\n    \n- **Query Parameters**:\n    \n    - `slug` (string, required): The unique identifier for the tour you wish to retrieve. In this case, it should be set to `the-forest-hiker`.\n        \n\n### Response Structure\n\nThe response will contain the details of the requested tour in a structured format. The expected response will typically include the following fields:\n\n- `id`: Unique identifier for the tour.\n    \n- `title`: Title of the tour.\n    \n- `description`: A detailed description of the tour.\n    \n- `duration`: Duration of the tour.\n    \n- `price`: Price for participating in the tour.\n    \n- `available_dates`: List of dates when the tour is available.\n    \n- `location`: The location where the tour takes place.\n    \n\nThe response will be in JSON format and will provide all the relevant details associated with the tour specified by the slug."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tour",
+					"id": "44081832-ac96b0bf-ed8a-4cf1-a089-43d84a3ade73",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Tour\",\r\n    \"duration\": 10,\r\n    \"difficulty\": \"easy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/6853ecba24a5d74928596982",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"6853ecba24a5d74928596982"
+							]
+						},
+						"description": "### API Endpoint: Retrieve Tour Details\n\nThis endpoint allows you to retrieve detailed information about a specific tour identified by its unique ID. In this case, the tour ID is `6853ecba24a5d74928596982`.\n\n#### Request Method\n\n- **GET**\n    \n\n#### Request URL\n\n- `{{URL}}api/v1/tours/6853ecba24a5d74928596982`\n    \n\n#### Request Body\n\n- { \"name\": \"Test Tour\", \"duration\": 10, \"difficulty\": \"easy\"}\n    \n    - **name** (string): The name of the tour.\n        \n    - **duration** (integer): The duration of the tour in hours.\n        \n    - **difficulty** (string): The difficulty level of the tour (e.g., easy, medium, hard).\n        \n\n#### Response Structure\n\nThe expected response will contain detailed information about the tour. While the exact structure may vary, it typically includes the following fields:\n\n- **id** (string): The unique identifier for the tour.\n    \n- **name** (string): The name of the tour.\n    \n- **duration** (integer): The duration of the tour in hours.\n    \n- **difficulty** (string): The difficulty level of the tour.\n    \n- **description** (string): A brief description of the tour.\n    \n- **price** (float): The cost of the tour.\n    \n- **availability** (boolean): Indicates if the tour is currently available for booking.\n    \n\nThis endpoint is useful for clients looking to display tour details or for further processing in their applications."
+					},
+					"response": []
+				},
+				{
+					"name": "Create  New Tour",
+					"id": "44081832-c57eee4b-e038-462a-ba6c-737869f769f4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New Test Tour\",\r\n    \"duration\": 1,\r\n    \"maxGroupSize\": 1,\r\n    \"difficulty\": \"easy\",\r\n    \"price\": 200,\r\n    \"summary\": \"Test tour\",\r\n    \"imageCover\": \"tour-3-cover.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours"
+							]
+						},
+						"description": "### Add Tour\n\nThis endpoint allows users to create a new tour by submitting the relevant details in the request body.\n\n#### Request Body Parameters\n\n- **name** (string): The name of the tour.\n    \n- **duration** (integer): The duration of the tour in days.\n    \n- **maxGroupSize** (integer): The maximum number of participants allowed for the tour.\n    \n- **difficulty** (string): The difficulty level of the tour (e.g., easy, medium, hard).\n    \n- **price** (number): The price of the tour.\n    \n- **summary** (string): A brief summary or description of the tour.\n    \n- **imageCover** (string): The filename of the cover image for the tour.\n    \n\n#### Expected Response\n\nUpon a successful request, the API will return a response containing the details of the newly created tour, including all the parameters provided in the request body, along with a unique identifier for the tour.\n\n#### Notes\n\n- Ensure that all required fields are provided in the request body to avoid validation errors.\n    \n- The `imageCover` should reference a valid image file that is accessible to the API.\n    \n- This endpoint is intended for creating new tours only; updates to existing tours should use a different endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Tour",
+					"id": "44081832-39da165e-2052-4314-a096-6d8dc3ccf0e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Sea Explorer II\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/5c88fa8cf4afda39709c2955",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"5c88fa8cf4afda39709c2955"
+							]
+						},
+						"description": "### Update Tour Details\n\nThis endpoint allows you to update the details of a specific tour identified by its unique ID. In this case, the tour ID is `5c88fa8cf4afda39709c2955`.\n\n#### Request Format\n\n- **Method**: PATCH\n    \n- **Endpoint**: `{{URL}}api/v1/tours/{tourId}`\n    \n- **Request Body**: The request body must be in JSON format and should contain the following key:\n    \n    - `name` (string): The new name for the tour.\n        \n\n**Example Request Body**:\n\n``` json\n{\n  \"name\": \"The Sea Explorer II\"\n}\n\n ```\n\n#### Response Structure\n\nOn a successful update, the response will typically include the updated tour details in JSON format. The structure of the response will include, but may not be limited to:\n\n- `id` (string): The unique identifier of the tour.\n    \n- `name` (string): The updated name of the tour.\n    \n- `updatedAt` (string): Timestamp indicating when the tour was last updated.\n    \n\nEnsure that the request body is correctly formatted to avoid errors during the update process."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tour",
+					"id": "44081832-10266d1a-5d07-4573-b5e1-0b0e879ab4d8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ahmed\",\r\n    \"duration\": 168\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/5c88fa8cf4afda39709c2961",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"5c88fa8cf4afda39709c2961"
+							]
+						},
+						"description": "### DELETE Tour Endpoint\n\nThis endpoint is used to delete a specific tour from the system by its unique identifier. The identifier is provided in the URL path, allowing for targeted removal of the specified tour.\n\n#### Request Format\n\n- **Method**: DELETE\n    \n- **URL**: `{{URL}}api/v1/tours/{tourId}`\n    \n    - Replace `{tourId}` with the unique identifier of the tour you wish to delete (e.g., `5c88fa8cf4afda39709c2961`).\n        \n\n#### Request Body\n\nWhile the DELETE request typically does not require a body, this specific implementation allows for an optional JSON payload. The expected format for the request body is as follows:\n\n``` json\n{\n  \"name\": \"string\",\n  \"duration\": \"integer\"\n}\n\n ```\n\n- **name** (string): The name associated with the tour (optional).\n    \n- **duration** (integer): The duration of the tour in hours (optional).\n    \n\n#### Expected Response\n\nUpon successful deletion, the API will return a response indicating the outcome of the operation. The expected response format is typically a JSON object that may include:\n\n- A confirmation message indicating that the tour has been successfully deleted.\n    \n- An HTTP status code of `204 No Content` if the deletion is successful and there is no additional content to return.\n    \n\nIn case of an error, the response may include an error message and a relevant HTTP status code to indicate the nature of the issue.\n\nEnsure to handle responses appropriately in your application to provide feedback to users regarding the success or failure of the deletion request."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top 5 Cheap Tours",
+					"id": "44081832-d0985d98-ff87-4279-a966-ac6df12ab178",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours/top-5-cheap",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"top-5-cheap"
+							]
+						},
+						"description": "### Get Top 5 Cheap Tours\n\nThis endpoint retrieves a list of the top 5 cheapest tours available. It is useful for users looking to find affordable travel options without having to filter through a larger dataset.\n\n#### Request\n\n- **Method**: GET\n    \n- **Endpoint**: `{{URL}}api/v1/tours/top-5-cheap`\n    \n\n#### Response\n\nThe response will contain a JSON object with the following structure:\n\n- **status**: Indicates the success or failure of the request (string).\n    \n- **data**: An array of tour objects, each containing:\n    \n    - **id**: Unique identifier for the tour (string).\n        \n    - **name**: Name of the tour (string).\n        \n    - **price**: Price of the tour (number).\n        \n    - **duration**: Duration of the tour (string).\n        \n    - **description**: Brief description of the tour (string).\n        \n\n#### Example Response\n\n``` json\n{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"1\",\n      \"name\": \"Budget Beach Getaway\",\n      \"price\": 99.99,\n      \"duration\": \"3 days\",\n      \"description\": \"A relaxing beach vacation at an affordable price.\"\n    },\n    ...\n  ]\n}\n\n ```\n\nThis endpoint does not require any input parameters. Simply make a GET request to retrieve the top 5 cheapest tours."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Monthly Plan",
+					"id": "44081832-48581dae-7359-491a-8e2f-d6cd813e5cd9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours/monthly-plan/2021",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"monthly-plan",
+								"2021"
+							]
+						},
+						"description": "### API Endpoint: Get Monthly Tour Plan\n\n**Method:** GET  \n**URL:** `{{URL}}api/v1/tours/monthly-plan/2021`\n\n#### Purpose\n\nThis endpoint retrieves the monthly tour plan for the specified year. It allows users to access detailed information about tours scheduled for each month of the year 2021.\n\n#### Request Format\n\nThis is a GET request and does not require a request body. The endpoint is designed to fetch data directly from the server without any additional parameters.\n\n#### Response Structure\n\nThe response will typically include:\n\n- **status**: Indicates the success or failure of the request.\n    \n- **data**: Contains an array of tour plans for each month, with details such as:\n    \n    - **month**: The name of the month.\n        \n    - **tours**: An array of tours scheduled for that month, each containing:\n        \n        - **tour_id**: Unique identifier for the tour.\n            \n        - **tour_name**: The name of the tour.\n            \n        - **description**: A brief description of the tour.\n            \n        - **date**: The date(s) when the tour is scheduled.\n            \n\nThe response will be in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tour Stats",
+					"id": "44081832-b6555c36-ae3f-4b4f-a580-764b22e17742",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours/tour-stats",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"tour-stats"
+							]
+						},
+						"description": "## Get Tour Statistics\n\nThis endpoint retrieves statistical data related to tours. It provides insights into various metrics associated with the tours available in the system.\n\n### Request Method\n\n- **GET**\n    \n\n### Request URL\n\n- `{{URL}}api/v1/tours/tour-stats`\n    \n\n### Expected Input Parameters\n\nThis endpoint does not require any input parameters in the request URL. However, you may include optional query parameters to filter or modify the response based on specific criteria if supported by the API.\n\n### Response Structure\n\nThe response will contain a JSON object with statistical data about the tours. The structure of the response includes:\n\n- **totalTours**: (integer) The total number of tours available.\n    \n- **completedTours**: (integer) The number of tours that have been completed.\n    \n- **upcomingTours**: (integer) The number of tours that are scheduled to occur in the future.\n    \n- **canceledTours**: (integer) The number of tours that have been canceled.\n    \n\n### Example Response\n\n``` json\n{\n  \"totalTours\": 150,\n  \"completedTours\": 120,\n  \"upcomingTours\": 25,\n  \"canceledTours\": 5\n}\n\n ```\n\n### Usage\n\nUse this endpoint to gather insights and analytics regarding the tours, which can be useful for reporting, decision-making, and improving tour offerings."
+					},
+					"response": []
+				},
+				{
+					"name": "Default Route Handler",
+					"id": "44081832-d8187308-dcf0-45ce-8408-e6c9f57f4306",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/tours",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"tours"
+							]
+						},
+						"description": "## API Endpoint: Get Tours\n\n### Purpose\n\nThis endpoint retrieves a list of available tours from the server. It is designed to provide users with information about various tours, including their details, availability, and other relevant attributes.\n\n### Request Method\n\n- **GET**\n    \n\n### Request Parameters\n\nThis endpoint does not require any additional input parameters. However, you may include query parameters to filter or sort the results based on specific criteria (if supported by the API).\n\n### Response Structure\n\nThe response from this endpoint will be in JSON format and will include an array of tour objects. Each tour object may contain the following fields:\n\n- **id**: Unique identifier for the tour.\n    \n- **name**: The name of the tour.\n    \n- **description**: A brief description of what the tour entails.\n    \n- **duration**: The length of the tour, typically in hours or days.\n    \n- **price**: The cost associated with the tour.\n    \n- **availability**: Information on whether the tour is currently available for booking.\n    \n\n### Example Response\n\n``` json\n[\n    {\n        \"id\": \"1\",\n        \"name\": \"City Sightseeing\",\n        \"description\": \"Explore the best sights of the city.\",\n        \"duration\": \"3 hours\",\n        \"price\": \"50\",\n        \"availability\": \"Available\"\n    },\n    {\n        \"id\": \"2\",\n        \"name\": \"Mountain Adventure\",\n        \"description\": \"A thrilling adventure in the mountains.\",\n        \"duration\": \"5 hours\",\n        \"price\": \"100\",\n        \"availability\": \"Not Available\"\n    }\n]\n\n ```\n\n### Usage\n\nTo use this endpoint effectively, simply send a GET request to the specified URL. You will receive a list of tours in the response, which can be utilized for display or further processing in your application."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tours Within Radius",
+					"id": "44081832-9fd14551-1a66-4b4e-85a8-89a6632503eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Tour\",\r\n    \"duration\": 10,\r\n    \"difficulty\": \"easy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/tours-within/200/center/34.111745,-118.113491/unit/mi",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"tours-within",
+								"200",
+								"center",
+								"34.111745,-118.113491",
+								"unit",
+								"mi"
+							]
+						},
+						"description": "### Get Tours Within a Specific Radius\n\nThis endpoint retrieves a list of tours available within a specified radius from a given geographical center point. The request allows users to specify the distance and location to find relevant tours.\n\n#### Request Parameters\n\n- **Radius**: `200` (integer)\n    \n    - The distance in miles within which to search for tours.\n        \n- **Center**: `34.111745,-118.113491` (string)\n    \n    - The geographical coordinates (latitude,longitude) that define the center point for the search.\n        \n- **Unit**: `mi` (string)\n    \n    - The unit of measurement for the radius, which can be in miles or kilometers.\n        \n\n#### Expected Response\n\nThe response will include a list of tours that match the specified criteria. Each tour object in the response will typically contain details such as:\n\n- Tour name\n    \n- Duration\n    \n- Difficulty level\n    \n- Additional tour-related information\n    \n\n#### Notes\n\n- Ensure that the coordinates provided are valid to receive accurate results.\n    \n- The response format will be in JSON, containing an array of tours that fit within the specified radius.\n    \n- This endpoint is useful for users looking to find tours based on their current location or a specified point of interest."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Distances to Tours From Point",
+					"id": "44081832-b8a858cb-15b9-4647-a025-faddbe344743",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Tour\",\r\n    \"duration\": 10,\r\n    \"difficulty\": \"easy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/distances/34.111745,-118.113491/unit/mi",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"distances",
+								"34.111745,-118.113491",
+								"unit",
+								"mi"
+							]
+						},
+						"description": "### API Endpoint: Get Tour Distances\n\n**Method:** `GET`  \n**Endpoint:** `{{URL}}api/v1/tours/distances/{coordinates}/unit/{unit}`\n\n#### Description\n\nThis endpoint retrieves the distance information for a specific tour based on the provided coordinates and unit of measurement. The coordinates are expected in the format of latitude and longitude, separated by a comma, while the unit specifies the measurement system (e.g., miles or kilometers).\n\n#### Parameters\n\n- **coordinates** (path parameter): A string representing the latitude and longitude (e.g., `34.111745,-118.113491`).\n    \n- **unit** (path parameter): A string indicating the unit of measurement for the distance (e.g., `mi` for miles).\n    \n\n#### Expected Response Format\n\nThe response will typically include distance-related details for the specified tour, formatted in JSON. The structure of the response will contain relevant fields such as distance, duration, and any other pertinent information related to the tour.\n\n#### Example Request\n\n``` http\nGET {{URL}}api/v1/tours/distances/34.111745,-118.113491/unit/mi\n\n ```\n\n#### Example Response\n\n``` json\n{\n  \"distance\": \"5 miles\",\n  \"duration\": \"10 minutes\",\n  \"difficulty\": \"easy\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"id": "44081832-a0f5c004-2398-4142-9591-5c2eeea96c9c"
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Get All Reviews",
+					"id": "44081832-b59c7096-5f25-47b3-a030-08890bcfb0e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews"
+							]
+						},
+						"description": "### API Endpoint: Retrieve Reviews\n\n**Method:** GET  \n**URL:** `{{URL}}api/v1/reviews`\n\n#### Purpose\n\nThis endpoint is used to retrieve a list of reviews from the server. It allows clients to access review data, which can be used for displaying user feedback or ratings.\n\n#### Request Format\n\nThis is a simple GET request and does not require any request body. The request can include optional query parameters for filtering or pagination, but these are not specified in this documentation.\n\n#### Response Structure\n\nThe response will be in JSON format and typically includes the following fields:\n\n- `reviews`: An array of review objects, each containing:\n    \n    - `id`: Unique identifier for the review.\n        \n    - `user_id`: Identifier for the user who wrote the review.\n        \n    - `product_id`: Identifier for the product being reviewed.\n        \n    - `rating`: Numeric rating given by the user.\n        \n    - `comment`: Textual feedback provided by the user.\n        \n    - `created_at`: Timestamp of when the review was created.\n        \n    - `updated_at`: Timestamp of when the review was last updated.\n        \n\n#### Example Response\n\n``` json\n{\n  \"reviews\": [\n    {\n      \"id\": \"1\",\n      \"user_id\": \"123\",\n      \"product_id\": \"456\",\n      \"rating\": 5,\n      \"comment\": \"Excellent product!\",\n      \"created_at\": \"2023-01-01T12:00:00Z\",\n      \"updated_at\": \"2023-01-01T12:00:00Z\"\n    },\n    ...\n  ]\n}\n\n ```\n\nThis endpoint is essential for applications that need to display user reviews and ratings for products or services."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Review",
+					"id": "44081832-721adb47-03f5-4398-a5b5-a5b7f55c0d75",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Tour\",\r\n    \"duration\": 10,\r\n    \"difficulty\": \"easy\"\r\n}"
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/6853c08c4a15af0ed469ab12",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"6853c08c4a15af0ed469ab12"
+							]
+						},
+						"description": "### API Endpoint: Retrieve Review Details\n\nThis endpoint allows users to retrieve detailed information about a specific review based on its unique identifier. The review can include various attributes such as the name of the tour, its duration, and the level of difficulty.\n\n#### Request Format\n\n- **Method**: GET\n    \n- **URL**: `{{URL}}api/v1/reviews/{reviewId}`\n    \n- **Path Parameter**:\n    \n    - `reviewId`: The unique identifier for the review you wish to retrieve (e.g., `6853c08c4a15af0ed469ab12`).\n        \n\n#### Example Request Body\n\nWhile this endpoint is a GET request and does not require a request body, the following is an example of a payload that might be associated with a review:\n\n``` json\n{\n  \"name\": \"Test Tour\",\n  \"duration\": 10,\n  \"difficulty\": \"easy\"\n}\n\n ```\n\n#### Response Structure\n\nUpon a successful request, the response will typically include the following fields:\n\n- `id`: The unique identifier of the review.\n    \n- `name`: The name of the tour associated with the review.\n    \n- `duration`: The duration of the tour in hours.\n    \n- `difficulty`: The difficulty level of the tour.\n    \n- `rating`: The overall rating given to the tour.\n    \n- `comments`: Any additional comments or feedback related to the review.\n    \n\nThe response will be in JSON format, providing a structured view of the review details.\n\n#### Example Response\n\n``` json\n{\n  \"id\": \"6853c08c4a15af0ed469ab12\",\n  \"name\": \"Test Tour\",\n  \"duration\": 10,\n  \"difficulty\": \"easy\",\n  \"rating\": 4.5,\n  \"comments\": \"An enjoyable experience!\"\n}\n\n ```\n\nThis endpoint is essential for users looking to access detailed information about specific reviews, which can aid in decision-making processes regarding tour selections."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Review",
+					"id": "44081832-63b556de-da90-423c-a0e9-2237eec53716",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"Best Tour Ever ❤️❤️❤️\",\r\n    \"rating\": 5,\r\n    \"tour\": \"5c88fa8cf4afda39709c295a\",\r\n    \"user\": \"6853ae72d472ca1d743dbefe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews"
+							]
+						},
+						"description": "## Add Review\n\nThis endpoint allows users to submit a review for a specific tour. The review includes a text description, a rating, and references the tour and user associated with the review.\n\n### Request\n\n**Method:** POST  \n**URL:** `{{URL}}api/v1/reviews`\n\n**Request Body:**  \nThe request body must be in JSON format and include the following parameters:\n\n- `review` (string): A text description of the review. This is where users can express their thoughts and experiences regarding the tour.\n    \n- `rating` (integer): A numerical rating for the tour, typically on a scale from 1 to 5, where 5 indicates the highest satisfaction.\n    \n- `tour` (string): The unique identifier of the tour being reviewed. This should correspond to an existing tour in the system.\n    \n- `user` (string): The unique identifier of the user submitting the review. This should correspond to an existing user in the system.\n    \n\n### Expected Response\n\nUpon successful submission, the API will return a response indicating the success of the operation. The response will typically include a confirmation message and may also include details about the newly created review, such as its ID.\n\n### Notes\n\n- Ensure that the `tour` and `user` identifiers provided in the request are valid and correspond to existing records in the database.\n    \n- The `rating` should be an integer between 1 and 5.\n    \n- The `review` text can include emojis and special characters."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"id": "44081832-0bda84a3-9e41-4e37-ad0d-5fff0c76d2c8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/6853fb8f306b1b1ca43b511c",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"6853fb8f306b1b1ca43b511c"
+							]
+						},
+						"description": "## Update Review Rating\n\nThis endpoint allows you to update the rating of a specific review identified by its unique ID.\n\n### Request\n\n- **Method**: PATCH\n    \n- **URL**: `{{URL}}api/v1/reviews/{review_id}`\n    \n\n### Request Body\n\nThe request body must be in JSON format and should contain the following parameter:\n\n- **rating** (integer): The new rating value for the review. This value should be between 1 and 5.\n    \n\n#### Example Request Body\n\n``` json\n{\n  \"rating\": 5\n}\n\n ```\n\n### Response\n\nUpon a successful update, the API will return a response indicating the status of the operation. The response typically includes:\n\n- **status**: A message indicating the success or failure of the update.\n    \n- **review_id**: The ID of the review that was updated.\n    \n- **updated_rating**: The new rating value that has been set.\n    \n\n### Notes\n\n- Ensure that the review ID in the URL corresponds to an existing review.\n    \n- Ratings must adhere to the specified range; otherwise, the request may be rejected.\n    \n- This operation is idempotent, meaning that repeated requests with the same rating will not change the outcome after the first successful update."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"id": "44081832-8b4708ba-9290-44af-a0ae-a7ec47c321c4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/reviews/6853f7233543bd02a4ffdc3b",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"reviews",
+								"6853f7233543bd02a4ffdc3b"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "44081832-624a6a0f-30aa-4b8d-84d2-e9eb36dc13b1"
+		},
+		{
+			"name": "Tours/Reviews",
+			"item": [
+				{
+					"name": "Create New Review On Tour",
+					"id": "44081832-c99f1671-cb8b-4832-9929-b769a38ed1dc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 5,\r\n    \"review\": \"Amazing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/tours/6853ecba24a5d74928596982/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"6853ecba24a5d74928596982",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tour Reviews",
+					"id": "44081832-dcae1965-a338-4b02-a6d5-4ad7df22fa74",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/tours/6853ecba24a5d74928596982/reviews",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"tours",
+								"6853ecba24a5d74928596982",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "44081832-3ccdcd6f-d094-4748-affa-fd728840c58d"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"id": "44081832-05fa48d6-a9d6-4f1e-843d-4e9e40dfabcb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/?role=user",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"id": "44081832-a1b9646a-82e6-4b52-bc39-bcfb02e66029",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/68514e8987072847180e8606",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"68514e8987072847180e8606"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"id": "44081832-4303df49-9473-4ed0-ba2b-427abfca6516",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Adminstrator\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/68514e8987072847180e863a",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"68514e8987072847180e863a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"id": "44081832-f843cf6c-ef94-4003-826d-29f4cfc930e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/6853ae72d472ca1d743dbefe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"6853ae72d472ca1d743dbefe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"id": "44081832-a0d7944c-c055-43ca-9b26-20b397734b37",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/me",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User",
+					"id": "44081832-5f8291d1-682d-4a70-b0aa-e107a5b93394",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jonas Schmedtmann\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/updateMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"updateMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Current User",
+					"id": "44081832-430891a7-265d-4c43-9dc7-e4e54ae4a259",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/v1/users/deleteMe",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"deleteMe"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "44081832-f035c2a3-f81b-49f2-99ce-98517fce0ba2"
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "82090710-0fbd-4e23-819f-10e071b44f03",
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "44081832-1a26cf8b-4fe2-49cb-ba99-af107cd0d73e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Khaled\",\r\n    \"email\": \"tester2@gmail.com\",\r\n    \"password\": \"test1234\",\r\n    \"passwordConfirm\": \"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/signup",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4094bf1-c626-4fd2-a40a-26313bad5554",
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "44081832-72dca3b1-f929-40d7-ab20-d34c0db6c33c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"loulou@example.com\",\r\n    \"password\": \"{{LOGIN_PASSWORD}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/login",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPassword",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4094bf1-c626-4fd2-a40a-26313bad5554",
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "44081832-04d16066-4595-49e4-852b-f18f32ca23b3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@jonas.io\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/forgotPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b76fc09f-7310-45d6-8632-2dfea3d3b8f1",
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "44081832-f35c7e27-bf7d-4b59-89e2-100f4b08c1ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"Hamadas136\",\r\n    \"password\": \"pass1234\",\r\n    \"passwordConfirm\": \"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/updateMyPassword",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"updateMyPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d4094bf1-c626-4fd2-a40a-26313bad5554",
+								"exec": [
+									"pm.environment.set('jwt', pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "44081832-0706b082-693d-497d-9007-fb5d7e2d6ed9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"pass1234\",\r\n    \"passwordConfirm\": \"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}api/v1/users/resetPassword/3ba11b96847d365ec73c5c867e9b58e23a157cf218f7eba02aa3b70e4dddd050",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"v1",
+								"users",
+								"resetPassword",
+								"3ba11b96847d365ec73c5c867e9b58e23a157cf218f7eba02aa3b70e4dddd050"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "44081832-007e22f9-b45b-4008-8e77-5dee84a81ad1"
+		}
+	]
+}
